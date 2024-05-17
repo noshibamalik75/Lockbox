@@ -1,0 +1,74 @@
+{% extends "LockBoxApp/base.html" %}
+
+{% block content %}
+<style>
+    .card {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 10px;
+        padding: 20px;
+      }
+      
+      .card-body {
+        padding: 20px;
+      }
+      
+      .form-group {
+        margin-bottom: 20px;
+      }
+      
+      .col-form-label {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      
+      .custom-select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        width: 100%;
+      }
+      
+      .btn-primary {
+        background-color: #337ab7;
+        border-color: #337ab7;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
+        width: 100%;
+      }
+      
+      .btn-primary:hover {
+        background-color: #23527c;
+        border-color: #23527c;
+      }
+</style>
+
+<div class="container">
+  <h1 class="text-center">Manage Access Settings for {{ file.name }}</h1>
+  <div class="card">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="shared_user" class="col-form-label">Select User to Share With:</label>
+          <select name="shared_user" class="form-control custom-select">
+            {% for user in users %}
+              <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="permission" class="col-form-label">Select Permission:</label>
+          <select name="permission" class="form-control custom-select">
+            <option value="read-only">Read-Only</option>
+            <option value="read-write">Read-Write</option>
+            <option value="no-access">No Access</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-3">Save Access Settings</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %} Lockbox {% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS -->
+    <style>
+    
+      body {
+        overflow-x: hidden;
+        font-family: 'Roboto', sans-serif;
+        background-color: #f5f5f5;
+      }
+      .navbar {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .navbar-brand {
+        font-weight: bold;
+        color: #444;
+      }
+      .navbar-nav .nav-link {
+        color: #444;
+        padding: 0 1rem;
+      }
+      .navbar-nav .nav-link:hover {
+        background-color: #f5f5f5;
+      }
+      .container {
+        padding: 3rem 1.5rem;
+      }
+      h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #444;
+        margin-bottom: 1rem;
+      }
+      p.lead {
+        font-size: 1.5rem;
+        color: #444;
+        margin-bottom: 3rem;
+      }
+      .card {
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #444;
+        margin-bottom: 1rem;
+      }
+      .card-text {
+        color: #444;
+        margin-bottom: 2rem;
+      }
+      .btn-primary {
+        background-color: #444;
+        border-color: #444;
+      }
+      .btn-primary:hover {
+        background-color: #333;
+        border-color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href='{% url "index" %}'>Lockbox</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          {% if user.is_authenticated %}
+          <li class="nav-item active">
+            <a class="nav-link font-weight-bold" href='{% url "upload_file" %}'>Upload File <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link font-weight-bold"  href='{% url "file_list" %}'>Files</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href='{% url "logout" %}'>Logout</a>
+          </li>
+          <li><h3 style="text-align:right; color: green; font-size: 110%">{{user.first_name}}</h3></li>
+          {% endif %}
+        {% if not user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href='{% url "login" %}'>Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href='{% url "signup" %}'>Signup</a>
+          </li>
+        {% endif %}
+        </ul>
+      </div>
+    </nav>
+    {% block content %}
+
+    {% endblock  %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntX5" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+{% extends "LockBoxApp/base.html" %}
+{% block content %}
+<style>
+    .card {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 10px;
+        padding: 20px;
+      }
+      
+      .card-body {
+        padding: 20px;
+      }
+      
+      .dropzone {
+        border: 2px dashed #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+      }
+      
+      .dz-message {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 20px;
+      }
+      
+      .dz-message h3 {
+        font-weight: bold;
+        margin-top: 0;
+      }
+      
+      .btn-primary {
+        background-color: #337ab7;
+        border-color: #337ab7;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
+        width: 100%;
+      }
+      
+      .btn-primary:hover {
+        background-color: #23527c;
+        border-color: #23527c;
+      }
+</style>
+<div class="container">
+  <h1 class="text-center">Create Your Account</h1>
+  <div class="card">
+    <div class="card-body">
+      <form action="{% url 'signup' %}" method="POST">
+        {% csrf_token %}
+        {% for message in messages %}
+        <h3 style="text-align:center;color:red">{{message}}</h3>
+        {% endfor %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="username" required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="email" required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="fname" required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="lname" required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            name="password" required
+          />
+          <ul>
+            <li>Your password can't be too similar to your other personal information.
+              <li>Your password must contain at least 8 characters.
+              <li>Your password can't be a commonly used password.
+              <li>Your password can't be entirely numeric.</li>
+          </ul>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            name="cpassword" required
+          />
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Include Dropzone.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+
+{% endblock %}

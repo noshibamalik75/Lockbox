@@ -1,0 +1,37 @@
+{% extends "LockBoxApp/base.html" %}
+{% block content %}
+<style>
+    /* Custom styling for list items */
+    ul {
+        list-style-type: none; /* Remove default bullet points */
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px; /* Add space between list items */
+        background-color: #f2f2f2; /* Light gray background */
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        cursor: pointer; /* Change cursor to pointer on hover */
+    }
+
+    /* Hover effect */
+    li:hover {
+        background-color: #e0e0e0; /* Lighter gray on hover */
+        transition: background-color 0.3s ease;
+    }
+</style>
+
+<h1 style="text-align:center">File List</h1>
+<div style="text-align:right;margin-right:5px;margin-top:-60px">
+    <a href="/delete_files" class="btn btn-danger">Delete Files</a>
+</div><br>
+<ul>
+    {% for file in files %}
+        <ul>
+            <li onclick="window.location.href = '{{ file.url }}';">{{ file.name }}</li>
+        </ul>
+    {% endfor %}
+</ul>
+{% endblock %}

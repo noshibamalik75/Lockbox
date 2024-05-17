@@ -1,0 +1,9 @@
+<!-- security_key_list.html -->
+{% block content %}
+<h1>Security Key List</h1>
+<ul>
+    {% for key in keys %}
+        <li>{{ key.key }}</li>
+    {% endfor %}
+</ul>
+{% endblock  %}

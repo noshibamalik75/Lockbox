@@ -1,0 +1,23 @@
+{% extends "LockBoxApp/base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Batch File Deletion</h1>
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <ul class="list-group list-group-flush">
+                    {% for file in files %}
+                        <li class="list-group-item">
+                            <input type="checkbox" name="file_ids" value="{{ file.id }}">
+                            <span>{{ file.name }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit" class="btn btn-danger btn-block">Delete Selected Files</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock  %}
